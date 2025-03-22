@@ -754,7 +754,6 @@ blockquote {
   left: 0;
   bottom: 0;
   height: 100%;
-  position: fixed;
   background-color: #fff;
   z-index: 10000;
 }
@@ -873,22 +872,6 @@ blockquote {
   .avatar > .av-pic {
     margin-top: 55px;
   }
-}
-.media > a,
-position: absolute > a,
-width: 100% > a,
-bottom: 0.5rem > a,
-text-align: right > a {
-  margin-left: 1em;
-  border: none;
-}
-img {
-  width: 1.5em;
-  height: auto;
-  opacity: 0.6;
-}
-img:hover {
-  opacity: 1;
 }
 .media a {
   position: relative;
