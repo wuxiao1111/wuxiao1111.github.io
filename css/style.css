@@ -749,7 +749,7 @@ blockquote {
 .SideBar {
   position: fixed;
   width: 240px;
-  overflow: hidden;
+  overflow: visible;
   top: 0;
   left: 0;
   bottom: 0;
@@ -873,6 +873,51 @@ blockquote {
   .avatar > .av-pic {
     margin-top: 55px;
   }
+}
+.media > a,
+position: absolute > a,
+width: 100% > a,
+bottom: 0.5rem > a,
+text-align: right > a {
+  margin-left: 1em;
+  border: none;
+}
+img {
+  width: 1.5em;
+  height: auto;
+  opacity: 0.6;
+}
+img:hover {
+  opacity: 1;
+}
+.media a {
+  position: relative;
+  display: inline-block;
+  margin-left: 1em;
+  border: none;
+/* 提示文字样式 */
+/* 悬停时显示提示文字 */
+}
+.media a::after {
+  content: attr(title) /* 使用 title 属性的值作为提示文字 */;
+  position: absolute;
+  bottom: 120% /* 将提示文字显示在按钮上方 */;
+  left: 50%;
+  transform: translateX(-50%) /* 水平居中 */;
+  background-color: rgba(51,51,51,0.9) /* 灰黑色背景，带透明度 */;
+  color: #fff /* 白色文字 */;
+  padding: 5px 10px;
+  border-radius: 4px /* 圆角 */;
+  font-size: 12px /* 字体大小 */;
+  white-space: nowrap /* 防止文字换行 */;
+  opacity: 0 /* 默认隐藏 */;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none /* 防止提示框干扰鼠标事件 */;
+}
+.media a:hover::after {
+  opacity: 1 /* 显示提示框 */;
+  visibility: visible;
 }
 .ListView {
   margin-bottom: 7em;
