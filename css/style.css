@@ -832,14 +832,6 @@ blockquote {
   }
 }
 @media screen and (max-width: 1024px) {
-  .SideBar {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 10em;
-    width: auto;
-    overflow: visible;
-  }
   .menu {
     position: relative;
     top: 185px;
@@ -848,19 +840,32 @@ blockquote {
   }
   .menu > ul {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    min-width: 280px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: auto;
     margin: 0 auto;
-    padding: 0;
+    padding: 10px 0;
+    overflow-x: auto /* 启用水平滚动 */;
+    white-space: nowrap /* 防止菜单项换行 */;
+    -webkit-overflow-scrolling: touch /* 启用平滑滚动（iOS） */;
+  }
+  .SideBar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10em;
+    width: auto;
+    overflow: visible;
   }
   .Btn > li {
-    margin: 1em 0;
-    padding: 0;
-    flex: 1;
-    border-right: none;
-    min-width: 70px;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-align: center;
+    flex: none;
+    min-width: auto;
   }
   .media {
     bottom: -2.5em;
@@ -882,24 +887,24 @@ blockquote {
 /* 悬停时显示提示文字 */
 }
 .media a::after {
-  content: attr(title) /* 使用 title 属性的值作为提示文字 */;
+  content: attr(title);
   position: absolute;
-  bottom: 120% /* 将提示文字显示在按钮上方 */;
+  bottom: 120%;
   left: 50%;
-  transform: translateX(-50%) /* 水平居中 */;
-  background-color: rgba(51,51,51,0.9) /* 灰黑色背景，带透明度 */;
-  color: #fff /* 白色文字 */;
+  transform: translateX(-50%);
+  background-color: rgba(51,51,51,0.9);
+  color: #fff;
   padding: 5px 10px;
-  border-radius: 4px /* 圆角 */;
-  font-size: 12px /* 字体大小 */;
-  white-space: nowrap /* 防止文字换行 */;
-  opacity: 0 /* 默认隐藏 */;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  pointer-events: none /* 防止提示框干扰鼠标事件 */;
+  pointer-events: none;
 }
 .media a:hover::after {
-  opacity: 1 /* 显示提示框 */;
+  opacity: 1;
   visibility: visible;
 }
 .ListView {
