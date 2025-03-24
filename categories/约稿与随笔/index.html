@@ -30,7 +30,7 @@
 <meta name="generator" content="Hexo 7.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
-<script src="https://unpkg.com/hexo-blog-encrypt@2.0.0/lib/index.min.js"></script>
+
 <body>
 <div class="Shell">
     <aside class='SideBar'>
@@ -367,6 +367,29 @@
         </span>
     </div>
 </footer>
+
+<script>
+    // 监听解密完成事件
+    window.addEventListener('hexo-blog-decrypt', function() {
+        // 强制重新渲染页面元素
+        setTimeout(() => {
+            if (typeof twemoji !== 'undefined') twemoji.parse(document.body);
+            if (typeof APlayer !== 'undefined') new APlayer(...);
+            location.reload(); // 必要时刷新
+        }, 300);
+    });
+
+    // 兼容旧版本回调
+    if (window.hbeCommon) {
+        window.hbeCommon.checkPassword = function(decrypted) {
+            decrypted.then(() => {
+                localStorage.setItem(`hexo-blog-encrypt:${location.pathname}`, '...');
+                window.dispatchEvent(new Event('hexo-blog-decrypt'));
+            });
+        };
+    }
+</script>
+
 
         </div>
     </div>

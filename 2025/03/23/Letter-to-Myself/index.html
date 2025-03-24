@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.css" class="aplayer-style-marker">
 <script src="https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js" class="aplayer-script-marker"></script>
 </head>
-<script src="https://unpkg.com/hexo-blog-encrypt@2.0.0/lib/index.min.js"></script>
+
 <body>
 <div class="Shell">
     <aside class='SideBar'>
@@ -158,6 +158,29 @@
         </span>
     </div>
 </footer>
+
+<script>
+    // 监听解密完成事件
+    window.addEventListener('hexo-blog-decrypt', function() {
+        // 强制重新渲染页面元素
+        setTimeout(() => {
+            if (typeof twemoji !== 'undefined') twemoji.parse(document.body);
+            if (typeof APlayer !== 'undefined') new APlayer(...);
+            location.reload(); // 必要时刷新
+        }, 300);
+    });
+
+    // 兼容旧版本回调
+    if (window.hbeCommon) {
+        window.hbeCommon.checkPassword = function(decrypted) {
+            decrypted.then(() => {
+                localStorage.setItem(`hexo-blog-encrypt:${location.pathname}`, '...');
+                window.dispatchEvent(new Event('hexo-blog-decrypt'));
+            });
+        };
+    }
+</script>
+
 
         </div>
     </div>
