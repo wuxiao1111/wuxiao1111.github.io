@@ -201,3 +201,68 @@ function copyScriptTag(scr) {
 return Pager;
 
 })));
+
+
+// ================= Algolia 搜索功能 =================
+(function() {
+    // 1. 确保只在有搜索元素的页面运行
+    if (!document.getElementById('search-button')) return;
+
+    // 2. 动态加载 InstantSearch.js 库
+    const loadAlgolia = () => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js';
+        script.onload = initAlgolia;
+        document.head.appendChild(script);
+    };
+
+    // 3. 初始化搜索功能
+    const initAlgolia = () => {
+        const search = instantsearch({
+            appId: 'YOUR_APP_ID',          // ← 替换为你的 Algolia Application ID
+            apiKey: 'YOUR_SEARCH_API_KEY', // ← 替换为 Search-Only API Key
+            indexName: 'hexo'              // ← 你的索引名称
+        });
+
+        search.addWidgets([
+            instantsearch.widgets.searchBox({
+                container: '#search-box',
+                placeholder: '搜索文章...'
+            }),
+            instantsearch.widgets.hits({
+                container: '#search-results',
+                templates: {
+                    item: `
+            <div class="search-hit">
+              <a href="{{url}}">
+                <h3>{{{_highlightResult.title.value}}}</h3>
+                <p>{{{_highlightResult.content.value}}}</p>
+              </a>
+            </div>
+          `
+                }
+            })
+        ]);
+
+        search.start();
+    };
+
+    // 4. 触发加载
+    document.addEventListener('DOMContentLoaded', loadAlgolia);
+})();
+
+// 控制模态框显示/隐藏
+document.getElementById('search-button').addEventListener('click', function() {
+    document.getElementById('search-modal').classList.add('active');
+});
+
+document.querySelector('.search-close').addEventListener('click', function() {
+    document.getElementById('search-modal').classList.remove('active');
+});
+
+// 点击模态框背景关闭
+document.getElementById('search-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.remove('active');
+    }
+});

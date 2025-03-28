@@ -1045,6 +1045,45 @@ time {
   padding: 0;
   overflow: hidden;
 }
+.search-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #4a4a4a;
+}
+.search-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.search-modal-content {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin: 5% auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+}
+#search-box {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+.search-hit {
+  margin: 10px 0;
+}
+.search-hit a {
+  color: $link-color;
+}
+.search-hit a:hover {
+  color: $link-hover-color;
+}
 .hljs {
     display: block;
     background: white;
