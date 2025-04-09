@@ -522,7 +522,7 @@ div {
     display: none !important;
   }
   .search-form {
-    margin-left: 25px !important; /* 向右偏移 20px */
+    margin-left: 35px !important; /* 向右偏移 20px */
   }
   .author-info {
     text-align: center;
